@@ -51,7 +51,7 @@ function Userdatatable({ data, column }) {
                  <Link to={`/ViewUserData/${value._id}`}>
                     <i className="bi bi-eye-fill view-icon"></i>
                   </Link>
-                  <Link to={`/EditUser/${value._id}`} >
+                  <Link to={`/EditUserData/${value._id}`} >
                   <i
                     className="bi bi-pencil-square edit-icon"
                   ></i>
