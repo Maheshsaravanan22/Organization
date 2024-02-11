@@ -27,7 +27,7 @@ function EditAdmin(props) {
   
   const [userdata, setUserdata] = useState({
     frstname: "",
-    lastname: "",
+    password: "",
     email: "",
     contact: "",
     address: "",
@@ -52,8 +52,8 @@ const handleChange = (event) => {
   const formdataClear = () => {
     handleClose();
     reset({
-      firstname: null,
-      lastname: null,
+      name: null,
+      password: null,
       email: null,
       contact: null,
       address: null,
@@ -106,14 +106,14 @@ const handleChange = (event) => {
 
   const updateUser = async (data) => {
     
-    const { firstname, lastname, email ,contact, address, location, department, title} = userdata
+    const { name, password, email ,contact, address, location, department, title} = userdata
       const res2 = await fetch(`/updateuser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstname, lastname, email ,contact, address, location, department, title}),
+          name, password, email ,contact, address, location, department, title}),
       });
 
       const updatedData = await res2.json();
@@ -169,41 +169,41 @@ const handleChange = (event) => {
                 <Grid container spacing={3}>
                   <Grid lg={4} md={4} sm={2} xs={12}>
                     <InputLabel shrink htmlFor="bootstrap-input">
-                     First Name
+                     Name
                     </InputLabel>
                     <TextField
-                      name="firstname"
-                      value={userdata.firstname}
+                      name="name"
+                      value={userdata.name}
                       size="small"
                       fullWidth
                       id="outlined-basic"
                       placeholder=""
                       variant="outlined"
                       onChange={handleChange}
-                      {...register("firstname", {
-                        required: "First Name is required.",
+                      {...register("name", {
+                        required: "Name is required.",
                       })}
-                      error={Boolean(errors.firstname)}
-                      helperText={errors.firstname?.message}
+                      error={Boolean(errors.name)}
+                      helperText={errors.name?.message}
                     />
                   </Grid>
                   <Grid lg={4} md={4} sm={2} xs={12}>
                     <InputLabel shrink htmlFor="bootstrap-input">
-                      Last Name
+                      Password
                       </InputLabel>
                       <TextField
-                      name="lastname"
-                      value={userdata.lastname}
+                      name="password"
+                      value={userdata.password}
                       size="small"
                       fullWidth
                       id="outlined-basic"
                       placeholder=""
                       variant="outlined"
-                      {...register("lastname", {
-                        required: "Last Name is required.",
+                      {...register("password", {
+                        required: "Password is required.",
                       })}
-                      error={Boolean(errors.lastname)}
-                      helperText={errors.lastname?.message}
+                      error={Boolean(errors.password)}
+                      helperText={errors.password?.message}
                     />
                   </Grid>
 

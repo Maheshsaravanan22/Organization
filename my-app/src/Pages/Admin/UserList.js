@@ -111,8 +111,8 @@ useEffect(() => {
 
   const columns = [
     { head: "S.No" },
-    { head: "First Name" },
-    { head: "Last Name" },
+    { head: "Name" },
+    { head: "Password" },
     { head: "Email" },
     { head: "Contact No" },
     { head: "Address" },
@@ -125,8 +125,8 @@ useEffect(() => {
 
   const columnsadmin = [
     { head: "S.No" },
-    { head: "First Name" },
-    { head: "Last Name" },
+    { head: "Name" },
+    { head: "Password" },
     { head: "Email" },
     { head: "Contact No" },
     { head: "Address" },

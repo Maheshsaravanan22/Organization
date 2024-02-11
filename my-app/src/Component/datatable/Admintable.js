@@ -14,12 +14,8 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { deldata } from "../context/ContextProvider";
 
-import { useParams } from "react-router-dom";
-
-function Usertable({ data, column,deletebtn }) {
+function Usertable({ data, column }) {
   useEffect(() => {
     $(document).ready(function () {
       $("#example").DataTable();
@@ -46,8 +42,8 @@ function Usertable({ data, column,deletebtn }) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{value.firstname}</TableCell>
-              <TableCell>{value.lastname}</TableCell>
+              <TableCell>{value.name}</TableCell>
+              <TableCell>{value.password}</TableCell>
               <TableCell>{value.email}</TableCell>
               <TableCell>{value.contact}</TableCell>
               <TableCell>{value.address}</TableCell>

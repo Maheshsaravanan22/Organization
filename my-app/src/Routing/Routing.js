@@ -6,6 +6,7 @@ import Adduser from '../Pages/Admin/AddUser';
 import Addadmin from '../Pages/Admin/Addadmin';
 import UserLists from "../Pages/Admin/UserList";
 import ViewUser from "../Pages/Admin/ViewUser";
+import Viewuserdata from "../Pages/Admin/ViewUserData";
 import ViewAdmin from "../Pages/Admin/ViewAdmin";
 import EditUser from "../Pages/Admin/EditUser";
 import EditAdmin from "../Pages/Admin/EditAdmin";
@@ -25,6 +26,7 @@ function Routing(){
                 <Route path="/UserLists" element={<UserLists/>}/>
                 <Route path="/UserData" element={<UserData/>}/>
                 <Route path="/ViewUser/:id" element={<ViewUser />} />
+                <Route path="/ViewUserData/:id" element={<Viewuserdata />} />
                 <Route path="/ViewAdmin/:id" element={<ViewAdmin />} />
                 <Route path="/EditUser/:id" element={<EditUser />} />
                 <Route path="/EditAdmin/:id" element={<EditAdmin />} />

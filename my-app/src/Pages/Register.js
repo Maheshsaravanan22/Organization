@@ -16,13 +16,24 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import Link from '@mui/material/Link';
 import axios from "axios";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 
 function Register() {
   const[email,setEmail] = useState("");
   const[username,setUsername] = useState("");
   const[password,setPassword] = useState("");
+  const [role, setRole] = useState(0)  
 
+  function onValueChange(event){
+    console.log(role);
+    setRole(event.target.value)
+}
+    
   const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -33,6 +44,7 @@ function Register() {
       email: data.email,
       username: data.username,
       password: data.password,
+      role: role
     };
     console.log(Adduserdata);
 
@@ -166,7 +178,28 @@ function Register() {
                           helperText={errors.password?.message}
                         />                         
                       </Box>
-                  
+                      <FormControl>
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                      >
+                        <FormControlLabel 
+                        value="Admin"
+                         name="role" 
+                         control={<Radio />} 
+                         label="Admin" 
+                         onChange={onValueChange}
+                         />
+                        <FormControlLabel
+                         value="User"
+                          name="role"
+                           control={<Radio />}
+                            label="User" 
+                            onChange={onValueChange}
+                            />
+                      </RadioGroup>
+                    </FormControl>
                       <Box className="btn-sec">
                         <Button 
                         type="submit"  

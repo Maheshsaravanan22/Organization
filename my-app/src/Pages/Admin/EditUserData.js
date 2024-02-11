@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { updatedata } from "../../Component/context/ContextProvider";
 
-function EditUser(props) {
+function EditUserData(props) {
   const navigate = useNavigate();
 
   
@@ -39,7 +39,6 @@ function EditUser(props) {
 
 
 const handleChange = (e) => {
-  
   setUserdata({ ...userdata, [e.target.name]: e.target.value });
 }
 
@@ -59,7 +58,7 @@ const handleChange = (e) => {
   };
 
   const handleclose = () => {
-    navigate("/UserLists");
+    navigate(-1);
   };
   const [open, setOpen] = React.useState(false);
 
@@ -100,15 +99,39 @@ const handleChange = (e) => {
   }, [])
 
   
-  const handleUpdate = async () => {
-    try {
-        const response = await axios.put(`/api/updateuser/${id}`, { userdata });
+  const updateuser = async (data) => {
+    const Adduserdata = {
+      name: data.name,
+      password: data.password,
+      email: data.email,
+      contact: data.contact,
+      address: data.address,
+      location: data.location,
+      department: data.department,
+      title: data.title,
+      reporting: data.reporting,
+    };  
+   console.log(Adduserdata )
 
-        console.log('Updated record:', response.data);
-    } catch (error) {
-        console.error('Update failed:', error);
+    const res2 = await fetch(`http://localhost:4001/updateuser${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(Adduserdata),
+    });
+ 
+    const updatedData = await res2.json();
+    console.log(updatedData);
+    navigate("/UserLists");
+
+    if (res2.status === 422 || !updatedData) {
+    } else {
+      setUPdata(updatedData);
+
     }
-};
+
+  };
 
   const refresh = () => window.location.reload(true);
 
@@ -125,7 +148,7 @@ const handleChange = (e) => {
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb breadcrumb-custom">
                     <li className="breadcrumb-item">
-                      <a data-abc="true">Admin</a>
+                      <a data-abc="true">User</a>
                     </li>
                     <li className="breadcrumb-item">
                       <a data-abc="true">Edit User</a>
@@ -147,7 +170,7 @@ const handleChange = (e) => {
         </Box>
         <Box className="card-frm-body ">
           <Box className="sub-mnu-contend">
-            <form id="myForm" onSubmit={handleSubmit(handleUpdate)}>
+            <form id="myForm" onSubmit={handleSubmit(updateuser)}>
               <Box className="form-group">
                 <Grid container spacing={3}>
                   <Grid lg={4} md={4} sm={2} xs={12}>
@@ -380,4 +403,4 @@ const handleChange = (e) => {
   );
 }
 
-export default EditUser;
+export default EditUserData;

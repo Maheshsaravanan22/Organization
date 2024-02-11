@@ -39,10 +39,10 @@ mongoose.connect("mongodb://127.0.0.1:27017/OrganizationDB")
 .catch((err)=>console.log(err));
 
 app.post("/register",(req,res) => {
-    const {email, username, password} = req.body;
+    const {email, username, password ,role} = req.body;
     bcrypt.hash(password,10)
     .then(hash => {
-        UserModel.create({email , username ,password: hash})
+        UserModel.create({email , username ,password: hash,role})
         .then(user => res.json("Success"))
         .catch(err => res.json(err))      
     }).catch(err => res.json(err))
@@ -51,9 +51,11 @@ app.post("/register",(req,res) => {
 
 app.post("/login",(req,res) => {
     const {email, password} = req.body;
+    console.log(req.body.password);
         UserModel.findOne({email : email})
        .then(user => {
         if(user){
+            console.log(user);
              bcrypt.compare(password, user.password, (err,response) => {
                if(response){
                    const token = jwt.sign({email : user.email, role : user.role},

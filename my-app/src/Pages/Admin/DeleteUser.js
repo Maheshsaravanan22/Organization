@@ -70,7 +70,7 @@ function DeleteUser() {
 
 
 const deletedata=()=>{
-    deleteuser(userdata._id, userdata.firstname)
+    deleteuser(userdata._id, userdata.name)
     setOpen(false)
     navigate("/UserLists");
   }
@@ -117,11 +117,11 @@ const deletedata=()=>{
                   <Grid container spacing={3}>
                     <Grid lg={4} md={4} sm={2} xs={12}>
                       <InputLabel shrink htmlFor="bootstrap-input">
-                       First Name
+                       Name
                       </InputLabel>
                       <TextField
                         size="small"
-                        value={userdata.firstname}
+                        value={userdata.name}
                         InputProps={{ readOnly: true }}
                         fullWidth
                         id="outlined-basic"
@@ -131,11 +131,11 @@ const deletedata=()=>{
                     </Grid>
                     <Grid lg={4} md={4} sm={2} xs={12}>
                       <InputLabel shrink htmlFor="bootstrap-input">
-                        Last Name
+                        Password
                         </InputLabel>
                         <TextField
                         size="small"
-                        value={userdata.lastname}
+                        value={userdata.password}
                         InputProps={{ readOnly: true }}                   
                         fullWidth
                         id="outlined-basic"

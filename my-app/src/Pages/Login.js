@@ -35,6 +35,7 @@ function Login() {
    
     axios.post("http://localhost:4001/login",Adduserdata)
     .then((res) => {
+
       if(res.data.status === 'Success' && res.data.role === 'Admin'){
         navigate("/UserLists")
       }
@@ -45,7 +46,8 @@ function Login() {
         alert("No record exists");
       }
       else{
-        navigate("/UserData")
+        console.log(Adduserdata.password);
+        navigate("/UserData",{state:{Adduserdata}});
       }
     })
     .catch((err) => console.log(err))

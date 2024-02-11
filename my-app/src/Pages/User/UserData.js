@@ -9,85 +9,91 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Userdatatable from "../../Component/datatable/Userdatatable";
 import Button from "@mui/material/Button";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,useLocation } from "react-router-dom";
 import Topmenuuser from "../Navbar/Topmenuuser";
 import axios from "axios";
 
-// const IOSSwitch = styled((props) => (
-//   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-// ))(({ theme }) => ({
-//   width: 42,
-//   height: 26,
-//   padding: 0,
-//   "& .MuiSwitch-switchBase": {
-//     padding: 0,
-//     margin: 2,
-//     transitionDuration: "300ms",
-//     "&.Mui-checked": {
-//       transform: "translateX(16px)",
-//       color: "#fff",
-//       "& + .MuiSwitch-track": {
-//         backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
-//         opacity: 1,
-//         border: 0,
-//       },
-//       "&.Mui-disabled + .MuiSwitch-track": {
-//         opacity: 0.5,
-//       },
-//     },
-//     "&.Mui-focusVisible .MuiSwitch-thumb": {
-//       color: "#33cf4d",
-//       border: "6px solid #fff",
-//     },
-//     "&.Mui-disabled .MuiSwitch-thumb": {
-//       color:
-//         theme.palette.mode === "light"
-//           ? theme.palette.grey[100]
-//           : theme.palette.grey[600],
-//     },
-//     "&.Mui-disabled + .MuiSwitch-track": {
-//       opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
-//     },
-//   },
-//   "& .MuiSwitch-thumb": {
-//     boxSizing: "border-box",
-//     width: 22,
-//     height: 22,
-//   },
-//   "& .MuiSwitch-track": {
-//     borderRadius: 26 / 2,
-//     backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
-//     opacity: 1,
-//     transition: theme.transitions.create(["background-color"], {
-//       duration: 500,
-//     }),
-//   },
-// }));
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  "& .MuiSwitch-switchBase": {
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
+        opacity: 1,
+        border: 0,
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
+    },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
+    },
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
+  },
+}));
 
 function UserData(props) {
   const [userdata, setUserdata] = useState([]);
   const navigate = useNavigate();
+  const[email,setEmail] = useState("");
 
   const { id } = useParams("");
   console.log(id);
+  const location = useLocation();
+ 
 
 useEffect(() => {
+  const email = location.state.Adduserdata.email;
+  console.log(email);
     const getdata = async () => {
         try{
-      const res = await axios.get(`http://localhost:4001/getuser/${id}`)
+      const res = await axios.get(`http://localhost:4001/records/${email}`)
+      console.log("userdata",res.data);
      setUserdata(res.data);
         }
         catch(err){
-            console.log("Error while using getuserdata api",err.message);
+            console.log("Error while using get user records api",err.message);
         }
     }
     getdata()
-  }, [])
+  }, [email])
 
   const columns = [
     { head: "S.No" },
-    { head: "First Name" },
-    { head: "Last Name" },
+    { head: "Name" },
+    { head: "Password" },
     { head: "Email" },
     { head: "Contact No" },
     { head: "Address" },

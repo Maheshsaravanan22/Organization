@@ -9,8 +9,8 @@ router.post("/addadmin", async (req, res) => {
       const newId =highestId ? highestId.adminid + 1 : 1;
       const newItem = new Addadmin({
         adminid: newId,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        name: req.body.name,
+        password: req.body.password,
         email: req.body.email,
         contact: req.body.contact,
         address: req.body.address,
@@ -30,7 +30,6 @@ router.post("/addadmin", async (req, res) => {
     try {
         const admindata = await Addadmin.find();
         res.status(201).send(admindata)
-        console.log("admin data",admindata);
     } catch (error) {
         res.status(422).json(error);
     }

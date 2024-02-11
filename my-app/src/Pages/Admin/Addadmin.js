@@ -34,8 +34,8 @@ function Addadmin() {
   const onSubmit = (data,e) => {
     e.preventDefault();
     const Addadmindata = {
-      firstname: data.firstname,
-      lastname: data.lastname,
+      name: data.name,
+      password: data.password,
       email: data.email,
       contact: data.contact,
       address: data.address,
@@ -67,8 +67,8 @@ function Addadmin() {
   const formdataClear = () => {
     handleClose();
     reset({
-      firstname: null,
-      lastname: null,
+      name: null,
+      password: null,
       email: null,
       contact: null,
       address: null,
@@ -118,38 +118,38 @@ function Addadmin() {
                   <Grid container spacing={3}>
                     <Grid lg={4} md={4} sm={2} xs={12}>
                       <InputLabel shrink htmlFor="bootstrap-input">
-                       First Name
+                       Name
                       </InputLabel>
                       <TextField
-                        name="firstname"
+                        name="name"
                         size="small"
                         fullWidth
                         id="outlined-basic"
                         placeholder=""
                         variant="outlined"
-                        {...register("firstname", {
-                          required: "First Name is required.",
+                        {...register("name", {
+                          required: "Name is required.",
                         })}
-                        error={Boolean(errors.firstname)}
-                        helperText={errors.firstname?.message}
+                        error={Boolean(errors.name)}
+                        helperText={errors.name?.message}
                       />
                     </Grid>
                     <Grid lg={4} md={4} sm={2} xs={12}>
                       <InputLabel shrink htmlFor="bootstrap-input">
-                        Last Name
+                        Password
                         </InputLabel>
                         <TextField
-                        name="lastname"
+                        name="password"
                         size="small"
                         fullWidth
                         id="outlined-basic"
                         placeholder=""
                         variant="outlined"
-                        {...register("lastname", {
-                          required: "Last Name is required.",
+                        {...register("password", {
+                          required: "Password is required.",
                         })}
-                        error={Boolean(errors.lastname)}
-                        helperText={errors.lastname?.message}
+                        error={Boolean(errors.password)}
+                        helperText={errors.password?.message}
                       />
                     </Grid>
 

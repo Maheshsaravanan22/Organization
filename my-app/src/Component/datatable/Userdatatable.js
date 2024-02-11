@@ -12,16 +12,15 @@ import Box from "@mui/material/Box";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function Userdatatable({ data, column,deletebtn }) {
+function Userdatatable({ data, column }) {
   useEffect(() => {
     $(document).ready(function () {
       $("#example").DataTable();
     });
   });
-  const navigate = useNavigate();
+
   return (
     <TableContainer component={Paper}>
       <Table id="example" sx={{ minWidth: 650 }} aria-label="simple table">
@@ -38,8 +37,8 @@ function Userdatatable({ data, column,deletebtn }) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{value.firstname}</TableCell>
-              <TableCell>{value.lastname}</TableCell>
+              <TableCell>{value.name}</TableCell>
+              <TableCell>{value.password}</TableCell>
               <TableCell>{value.email}</TableCell>
               <TableCell>{value.contact}</TableCell>
               <TableCell>{value.address}</TableCell>
@@ -49,7 +48,7 @@ function Userdatatable({ data, column,deletebtn }) {
               <TableCell>{value.reporting}</TableCell>
               <TableCell>
                 <Box className="tabel-action-icon">
-                 <Link to={`/ViewUser/${value._id}`}>
+                 <Link to={`/ViewUserData/${value._id}`}>
                     <i className="bi bi-eye-fill view-icon"></i>
                   </Link>
                   <Link to={`/EditUser/${value._id}`} >
