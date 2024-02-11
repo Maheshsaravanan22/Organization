@@ -101,7 +101,7 @@ function Login() {
                       >
                         Login
                       </Typography>
-                      <Box className="mb-3" sx={{ height: "10%" }}>
+                      <Box sx={{ height: "10%" }}>
                         <label
                           for="exampleFormControlInput1"
                           className="form-label"
@@ -125,7 +125,7 @@ function Login() {
                           helperText={errors.email?.message}
                         />
                       </Box>
-                      <Box className="mb-3">
+                      <Box>
                         <TextField
                           name="password"
                           id="outlined-basic"

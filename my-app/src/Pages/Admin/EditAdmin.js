@@ -21,7 +21,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { updatedata } from "../../Component/context/ContextProvider";
 
-function EditUser(props) {
+function EditAdmin(props) {
   const navigate = useNavigate();
 
   
@@ -34,7 +34,6 @@ function EditUser(props) {
     location: "",
     department: "",
     title: "",
-    reporting: "",
 })
 
 
@@ -61,7 +60,6 @@ const handleChange = (event) => {
       location: null,
       department: null,
       title: null,
-      reporting: null,
     });
   };
 
@@ -95,7 +93,7 @@ const handleChange = (event) => {
   useEffect(() => {
     const getdata = async () => {
      try{
-      const res = await axios.get(`http://localhost:4001/getuser/${id}`)
+      const res = await axios.get(`http://localhost:4001/getadmin/${id}`)
      setUserdata(res.data);
       console.log(res.data);
         }
@@ -108,14 +106,14 @@ const handleChange = (event) => {
 
   const updateUser = async (data) => {
     
-    const { firstname, lastname, email ,contact, address, location, department, title, reporting} = userdata
+    const { firstname, lastname, email ,contact, address, location, department, title} = userdata
       const res2 = await fetch(`/updateuser/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstname, lastname, email ,contact, address, location, department, title, reporting}),
+          firstname, lastname, email ,contact, address, location, department, title}),
       });
 
       const updatedData = await res2.json();
@@ -147,7 +145,7 @@ const handleChange = (event) => {
                       <a data-abc="true">Admin</a>
                     </li>
                     <li className="breadcrumb-item">
-                      <a data-abc="true">Edit User</a>
+                      <a data-abc="true">Edit Admin</a>
                     </li>
                   </ol>
                 </nav>
@@ -162,7 +160,7 @@ const handleChange = (event) => {
       <Stack className="card-sectons" spacing={2}>
         <Box className="card-main-hdr">
           <ArrowBackIcon onClick={() => navigate(-1)} />
-          <h4>Edit User</h4>
+          <h4>Edit Admin</h4>
         </Box>
         <Box className="card-frm-body ">
           <Box className="sub-mnu-contend">
@@ -327,25 +325,6 @@ const handleChange = (event) => {
                       helperText={errors.title?.message}
                     />
                   </Grid>
-                  <Grid lg={4} md={4} sm={2} xs={12}>
-                    <InputLabel shrink htmlFor="bootstrap-input">
-                      Reporting To
-                    </InputLabel>
-                    <TextField
-                      name="reporting"
-                      size="small"
-                      value={userdata.reporting}
-                      fullWidth
-                      id="outlined-basic"
-                      placeholder=""
-                      variant="outlined"
-                      {...register("reporting", {
-                        required: "Reporting To is required.",
-                      })}
-                      error={Boolean(errors.reporting)}
-                      helperText={errors.reporting?.message}
-                    />
-                  </Grid>
                 </Grid>
               </Box>
 
@@ -399,4 +378,4 @@ const handleChange = (event) => {
   );
 }
 
-export default EditUser;
+export default EditAdmin;

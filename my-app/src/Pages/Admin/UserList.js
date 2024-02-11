@@ -10,6 +10,7 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Usertable from "../../Component/datatable/Usertable";
+import Admintable from "../../Component/datatable/Admintable";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
@@ -71,11 +72,27 @@ const IOSSwitch = styled((props) => (
 function UserLists(props) {
   const [toggle, setToggle] = useState(true);
   const [userdata, setUserdata] = useState([]);
+  const [admindata, setAdmindata] = useState([]);
   const navigate = useNavigate();
   const pagelink = () => {
     navigate("/AddUser");
   };
-
+   const pagelinkadmin = () => {
+    navigate("/Addadmin");
+   }
+   useEffect(() => {
+    const getadmindata = async () => {
+        try{     //if(admin)
+          console.log()
+      const res = await axios.get('http://localhost:4001/getadmindata')
+      setAdmindata(res.data);
+        }
+        catch(err){
+            console.log("Error while using getadmindata api",err.message);
+        }
+    }
+    getadmindata()
+  }, [])
   
 useEffect(() => {
     const getdata = async () => {
@@ -90,6 +107,8 @@ useEffect(() => {
     getdata()
   }, [])
 
+
+
   const columns = [
     { head: "S.No" },
     { head: "First Name" },
@@ -103,6 +122,20 @@ useEffect(() => {
     { head: "Reporting To" },
     { head: "Actions" },
   ];
+
+  const columnsadmin = [
+    { head: "S.No" },
+    { head: "First Name" },
+    { head: "Last Name" },
+    { head: "Email" },
+    { head: "Contact No" },
+    { head: "Address" },
+    { head: "Location" },
+    { head: "Department" },
+    { head: "Title" },
+    { head: "Actions" },
+  ];
+
   const listviewtog = () => {
     setToggle(!toggle);
   };
@@ -125,7 +158,7 @@ useEffect(() => {
                         <a data-abc="true">Admin</a>
                       </li>
                       <li className="breadcrumb-item">
-                        <a data-abc="true">User Lists</a>
+                        <a data-abc="true">Records</a>
                       </li>
                     </ol>
                   </nav>
@@ -144,15 +177,15 @@ useEffect(() => {
               <Grid container spacing={2}>
                 <Grid className="pd-lf" lg={5} md={6} sm={12} xs={12}>
                   <Grid className="switch-btn-sec pd-lf">
-                    <Typography className="toggle-lab ">
-                      User Lists View
+                  <Typography className="toggle-lab ">
+                     Admin Records
                     </Typography>
                     <FormControlLabel
                       control={
                         <IOSSwitch sx={{ m: 1 }} onClick={listviewtog} />
                       }
                     />
-                    <Typography className="toggle-lab ">List View</Typography>
+                    <Typography className="toggle-lab ">User Records</Typography>
                   </Grid>
                 </Grid>
                 <Grid className="pd-rg" lg={7} md={6} sm={12} xs={12}>
@@ -165,6 +198,14 @@ useEffect(() => {
                       sm={6}
                       xs={6}
                     >
+                       <Button
+                        onClick={pagelinkadmin}
+                        className="Add-btn-admin"
+                        variant="contained"
+                      >
+                        {" "}
+                        Add New Admin{" "}
+                      </Button>
                       <Button
                         onClick={pagelink}
                         className="Add-btn"
@@ -182,10 +223,17 @@ useEffect(() => {
         </Grid>
         {toggle ? (
           <Stack className="card-sectons-2" spacing={2}>
-            <Box>Dashboard view...</Box>
+            <Typography variant="h4" className="heading-records">Admin Records</Typography>
+                <Box>
+              <Admintable
+                data={admindata}
+                column={columnsadmin}
+              />
+            </Box>
           </Stack>
         ) : (
           <Stack className="card-sectons-2" spacing={2}>
+             <Typography variant="h4" className="heading-records">User Records</Typography>
             <Box>
               <Usertable
                 data={userdata}

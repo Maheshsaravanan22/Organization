@@ -14,6 +14,7 @@ const bodyParser = require("body-parser");
 app.use(cors());
 
 const routes = require("./routes/adduser");
+const routesadd = require("./routes/Addadmin");
 
 require('dotenv').config({path:'.env'})
 
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/',routes);
+app.use('/',routesadd);
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/OrganizationDB")

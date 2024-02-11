@@ -25,7 +25,7 @@
     box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
     overflow: hidden;
     padding: 18px 25px;
-    margin: 0px 0px;
+    margin: 10px 0px;
 }
 .toggle-hdr-sec {
     display: flex;
@@ -41,6 +41,26 @@
     font-size: 15px !important;
     padding: 7px 16px !important;
     color: #fff !important;
+}
+.Add-btn-admin {
+    background: #107A8A !important;
+    box-shadow: none !important;
+    text-transform: capitalize !important;
+    font-family: 'Quicksand', sans-serif !important;
+    font-size: 15px !important;
+    padding: 7px 16px !important;
+    color: #fff !important;
+    margin-right: 10px !important;
+}
+.Add-btn-user {
+    background: #107A8A !important;
+    box-shadow: none !important;
+    text-transform: capitalize !important;
+    font-family: 'Quicksand', sans-serif !important;
+    font-size: 15px !important;
+    padding: 7px 16px !important;
+    color: #fff !important;
+    margin-right: 10px !important;
 }
 .toggle-lab {
     font-size: 18px !important;
@@ -466,5 +486,8 @@ display:flex;
 .addunit-btn
 {
     display: flex;
+}
+.heading-records{
+   text-align: center;
 }
 

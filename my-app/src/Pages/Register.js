@@ -91,7 +91,7 @@ function Register() {
                       >
                         Register
                       </Typography>
-                      <Box className="mb-3" sx={{ height: "10%" }}>
+                      <Box sx={{ height: "10%" }}>
                         <label
                           for="exampleFormControlInput1"
                           className="form-label"
@@ -117,7 +117,7 @@ function Register() {
                         />
                       
                       </Box>
-                      <Box className="mb-3">
+                      <Box>
                          <TextField
                           id="outlined-basic"
                           size="small"                     
@@ -132,7 +132,7 @@ function Register() {
                           helperText={errors.username?.message}
                         />
                         </Box>
-                      <Box className="mb-3">
+                      <Box>
                         <TextField
                           id="outlined-basic"
                           size="small"

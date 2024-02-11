@@ -1,14 +1,14 @@
 
 const router = require("express").Router();
-const Adduser = require("../models/Adduser");
+const Addadmin = require("../models/Addadmin");
 
 
-router.post("/adduser", async (req, res) => {
+router.post("/addadmin", async (req, res) => {
     try {
-      const highestId = await Adduser.findOne().sort('-userid').exec();
-      const newId =highestId ? highestId.userid + 1 : 1;
-      const newItem = new Adduser({
-        userid: newId,
+      const highestId = await Addadmin.findOne().sort('-adminid').exec();
+      const newId =highestId ? highestId.adminid + 1 : 1;
+      const newItem = new Addadmin({
+        adminid: newId,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
@@ -17,7 +17,6 @@ router.post("/adduser", async (req, res) => {
         location: req.body.location,
         department: req.body.department,
         title: req.body.title,
-        reporting: req.body.reporting
       });
     console.log(newItem);
       await newItem.save();
@@ -27,21 +26,22 @@ router.post("/adduser", async (req, res) => {
     }
   })
 
-  router.get("/getuserdata",async(req,res)=>{
+  router.get("/getadmindata",async(req,res)=>{
     try {
-        const userdata = await Adduser.find();
-        res.status(201).send(userdata)
+        const admindata = await Addadmin.find();
+        res.status(201).send(admindata)
+        console.log("admin data",admindata);
     } catch (error) {
         res.status(422).json(error);
     }
   })
 
-  router.get("/getuser/:id",async(req,res)=>{
+  router.get("/getadmin/:id",async(req,res)=>{
     try {
         console.log(req.params);
         const {id} = req.params;
   
-        const userindividual = await Adduser.findById({_id:id});
+        const userindividual = await Addadmin.findById({_id:id});
         console.log(userindividual);
         res.status(201).send(userindividual)
   
@@ -50,11 +50,11 @@ router.post("/adduser", async (req, res) => {
     }
   })
 
-  router.put("/updateuser/:id",async(req,res)=>{
+  router.put("/updateadmin/:id",async(req,res)=>{
     try {
         const {id} = req.params;
   
-        const updateduser = await Adduser.findByIdAndUpdate(id,req.body,{
+        const updateduser = await Addadmin.findByIdAndUpdate(id,req.body,{
             new:true
         });
   
@@ -66,18 +66,19 @@ router.post("/adduser", async (req, res) => {
     }
   })
   
-  router.delete("/deleteuser/:id",async(req,res)=>{
+  router.delete("/deleteadmin/:id",async(req,res)=>{
     try {
         const {id} = req.params;
   
-        const deletuser = await Adduser.findByIdAndDelete({_id:id})
-        console.log(deletuser);
-        res.status(201).send(deletuser);
+        const deleteadmin = await Addadmin.findByIdAndDelete({_id:id})
+        console.log(deleteadmin);
+        res.status(201).send(deleteadmin);
   
     } catch (error) {
         res.status(422).json(error);
     }
   })
+
  
 
   module.exports = router
